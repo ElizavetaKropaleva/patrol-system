@@ -1,0 +1,85 @@
+<!-- HTML-код страницы, содержащей детектированную информацию об ОС  -->
+
+<!DOCTYPE html>
+<html lang="ru" xmlns="http://www.w3.org/1999/html">
+    <head>
+        <meta charset="UTF-8">
+        <!-- CSS only -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+        <!-- JavaScript Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+        <title>Полученная информация</title>
+        <style type="text/css">
+            body {
+                font-family: 'Century Gothic';
+                font-size: 24pt;
+            }
+            .card {
+                border-color: #FF3333;
+                border-width: 3pt;
+            }
+            .navbar-t {
+                background: linear-gradient(360deg, #FFFFFF, #FF3333);
+            }
+            h1 {
+                font-size: 40pt;
+            }
+            .btn {
+                font-size: 18pt;
+            }
+        </style>
+    </head>
+    <body>
+        <nav class="navbar-t p-3 pb-5 d-flex align-items-center justify-content-center">
+            <div>
+                <div class="text-center pt-3">
+                    <a href="{% url 'patrol:home' %}" class="btn btn-outline-light btn-lg m-2 mt-0" role="button">&nbsp;&nbsp;&nbsp;Разорвать соединение&nbsp;&nbsp;&nbsp;</a>
+                </div>
+                <h1 style="color: #ffffff">Полученная информация</h1>
+            </div>
+        </nav>
+        {% load static %}
+        {% block content %}
+            <div class="content p-4">
+                <div class="row pb-4 pt-3">
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h1 class="card-title text-center p-2">Информация об ОС:</h1>
+                                <p class="card-text"><b>ОС:</b> {{ os_data.OS }} </p>
+                                <p class="card-text"><b>Описание:</b> {{ os_data.description }} </p>
+                                <p class="card-text"><b>Версия:</b> {{ os_data.release }} </p>
+                                <p class="card-text"><b>Кодовое имя:</b> {{ os_data.codename }} </p>
+                                <p class="card-text"><b>Архитектура:</b> {{ os_data.architecture }} </p>
+                                <p class="card-text"><b>Ядро операционной системы:</b> {{ os_data.kernel }} </p>
+                                <p class="card-text"><b>Тип системы:</b> {{ os_data.type }} </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h1 class="card-title text-center p-2">Информация о ЦП:</h1>
+                                <p class="card-text"><b>Режимы работы процессора:</b> {{ cpu_data.modes }} </p>
+                                <p class="card-text"><b>Идентификатор производителя:</b> {{ cpu_data.vendor }} </p>
+                                <p class="card-text"><b>Модель:</b> {{ cpu_data.model }} </p>
+                                <p class="card-text"><b>Общее количество процессоров:</b> {{ cpu_data.CPUs }} </p>
+                                <p class="card-text"><b>Количество потоков на ядро:</b> {{ cpu_data.threads }} </p>
+                                <p class="card-text"><b>Количество ядер на сокет:</b> {{ cpu_data.cores_per_socket }} </p>
+                                <p class="card-text"><b>Количество сокетов:</b> {{ cpu_data.sockets }} </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mt-4">
+                    <div class="card-body">
+                        <h1 class="card-title text-center p-2">Логи:</h1>
+                        {% for log in logs %}
+                            <p class="card-text"><b>[{{ log.date|date:"d.m.Y" }} — {{ log.time|date:"H:i:s" }}]&nbsp;&nbsp;&nbsp;&nbsp;function: </b> {{ log.function }}&nbsp;&nbsp;&nbsp;&nbsp;<b>event: </b> {{ log.event }} </p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% endblock %}
+    </body>
+</html>
