@@ -23,7 +23,7 @@ Patrol System - это веб-приложение, созданное на ба
     python manage.py runserver
     ```
 
-4. Открыть приложение в браузере по адресу [http://localhost:8000/](http://localhost:8000/patrol)
+4. Открыть приложение в браузере по адресу [http://localhost:8000/patrol](http://localhost:8000/patrol)
 
 ## Использование
 
