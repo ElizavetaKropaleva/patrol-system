@@ -11,19 +11,21 @@ Patrol System - это веб-приложение, созданное на ба
     pip install paramiko
     ```
 
-2. Применить миграции:
+2. Развернуть БД из файла pt-patrol.sql
+
+3. Применить миграции:
 
     ```bash
     python manage.py migrate
     ```
 
-3. Запустить сервер:
+4. Запустить сервер:
 
     ```bash
     python manage.py runserver
     ```
 
-4. Открыть приложение в браузере по адресу [http://localhost:8000/patrol](http://localhost:8000/patrol)
+5. Открыть приложение в браузере по адресу [http://localhost:8000/patrol](http://localhost:8000/patrol)
 
 ## Использование
 
